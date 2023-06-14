@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="css/primary.css" />
+    <link rel="stylesheet" href="css/choose-user.css" />
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mentor Match</title>
+  </head>
+  <body>
+    <div class="choose-type-page-container">
+      <form action="/" method="GET">
+        <button class="back" type="submit" id="back">Back</button>
+      </form>
+      <div class="choose-type-content-container">
+        <h1>(Login) I'm a...</h1>
+        <div class="choose-type-button-container">
+          <form action="/mentorlogin" method="GET">
+            <button type="submit" type="submit" id="Mentor">Mentor</button>
+          </form>
+          <form action="/menteelogin" method="GET">
+            <button type="submit" type="submit" id="Mentee">Mentee</button>
+          </form>
+          <form action="/adminlogin" method="GET">
+            <button type="submit" id="Admin">Admin</button>
+          </form>
+        </div>
+      </div>
+      <img src="images/interaction3.png" alt="Uoo Icon" />
+    </div>
+  </body>
+</html>

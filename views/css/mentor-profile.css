@@ -1,0 +1,125 @@
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+
+body{
+  margin: 0;
+}
+
+.mentor-profile-container{
+  padding: 0 5vw;
+  padding-bottom: 5vh;
+  padding-top: 2vh;
+}
+
+h1{
+  color: #00508F;
+}
+
+h3{
+  color: #FFC20E;
+  font-weight: 600;
+  font-size: 17pt;
+  margin: 0;
+
+}
+
+h4{
+  color: #92A8BA;
+  font-weight: 100;
+}
+
+.profile-add-button{
+  background-color: #00508F;
+  width: 10%;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 1vh 1vw;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.profile-add-button:hover{
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: #FFC20E;
+
+}
+
+.profile-delete-button {
+  background-color: white;
+  cursor: pointer;
+}
+
+.profile-delete-button:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: red;
+}
+
+.detail-image-container{
+  display: flex;
+} 
+.detail-container{
+  flex:2;
+}
+
+.image-container{
+  flex:1;
+  padding: 0 5vw;
+  margin-top: 3vh ;
+  /* display: flex;
+  flex-direction: column;
+  /* align-items: center;
+  justify-content: center; */ 
+}
+
+.image-container button:hover {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: #FFC20E;
+
+}
+
+.image-container button{
+  background-color: #00508F;
+  width: auto;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 1vh 1vw;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.social-media-input{
+  background-color: #00508F;
+  width: auto;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 1vh 1vw;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-left: 70px;
+}
+
+.social-media-input:hover{
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: #FFC20E;
+}
+
+#image{
+  border-radius: 20%;
+  border: 1px solid #00508F;
+}
+
+.image-container h4{
+margin-top: 0;
+margin-bottom: 0;
+}

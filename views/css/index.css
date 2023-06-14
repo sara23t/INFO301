@@ -1,0 +1,108 @@
+.background-box {
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80vw;
+    transform: translateX(-30vw) skew(-18deg, 0deg);
+    background-color: var(--primary);
+    z-index: -1;
+  }
+  
+  .header {
+    display: flex; /* the following 2 properties only work with FLEXBOX */
+    justify-content: space-between; /*evenly places children elements in this container horizontally */
+    align-items: center; /* center children elements vertically */
+    max-height: 20vh; /* vh= vertical height */
+    background-color: #0f2181;
+    padding: 20px 10%; /* first value is top and bottom padding. 2nd value is left and right padding */
+  }
+
+  .header h2 {
+    color: white;
+    font-weight: 100; /*stroke */
+    margin-bottom: 20px; /*margin for spacing outside element*/
+  }
+  
+  .header h1 {
+    color: #ced11c;
+    font-size: 24pt;
+  }
+  
+  .header img {
+    height: 50px;
+  }
+  
+  .page-container {
+    display: flex;
+    justify-content: center; /* center children elements horizontally */
+    align-items: center; /* center children elements vertically */
+    height: 100vh;
+    padding: 0 10vw;
+  }
+  
+  .content-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+  }
+  
+  .text-container {
+    margin-bottom: 50px;
+    font-weight: 600;
+    font-size: 26pt;
+    color: white;
+  }
+  
+  .text-container p {
+    font-size: 15pt;
+  }
+
+  .title {
+    color: var(--secondary);
+    margin-bottom: 20px;
+  }
+  
+  .info-container {
+    flex: 1; /** fill remaining space if 1 child */
+  }
+  
+  .image-container {
+    flex: 1;
+  }
+  
+  .image-container img {
+    width: 100%;
+  }
+  
+  .button-container button {
+    border-radius: 50px;
+    margin-right: 40px;
+    font-size: 20pt;
+    padding: 16px 24px;
+    cursor: pointer;
+    width: 180px;
+  
+    border: none;
+    outline: none;
+  }
+  
+  .button-container button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+      0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  #signup {
+    color: #00508f;
+  }
+  #login {
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+  }
+  
+  

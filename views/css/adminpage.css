@@ -1,0 +1,42 @@
+body{
+  background-color:  #00508F;
+}
+table, th, td, tr, tbody{
+   border: 2px solid;
+   border-color: #FFC20E;
+ }
+ .info{
+   color: black;
+   font-weight: bold;
+ }
+ 
+ h2{
+   color: #FFC20E;
+   padding-left: 7%;
+ }
+ .delete{
+   color: yellow;
+ }
+ .nav-button-container{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+ .nav-buttons{
+   flex: 3;
+   padding: 3.5vh 2.5vw;
+ }
+ .nav-buttons button{
+   color:#00508F;
+   width: 17%;
+   padding: 1vh 0;
+   margin-right: 5px;
+   font-size: 15px;
+   cursor: pointer;
+ }
+ .nav-buttons button:hover{
+   background-color:#FFC20E;
+ }
+ .col2{
+font-weight: bold;
+ }

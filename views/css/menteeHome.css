@@ -1,0 +1,97 @@
+body{
+    margin:0;
+    overflow-y: scroll;
+}
+
+.body-container {
+    height: 70px;
+    padding: 0 5vw;
+    padding-bottom: 5vh;
+    padding-top: 2vh;
+    min-height: 100vh;
+   }
+
+   
+.data th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 3vh 1vw;
+   }
+
+.body-container{
+    display: flex;
+
+}
+
+.notification-container{
+    flex:1;
+    overflow-y: scroll;   
+
+}
+.meeting-container{
+    flex:1;
+    margin-left: 50px;
+}
+
+.meeting-container button{
+    background-color: #00508F;
+    width: 10vw;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 1.5vh 1vw;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.meeting-container button:hover{
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: #FFC20E;
+}
+
+#decline:hover{
+    color: red;
+}
+
+
+h1 {
+    margin-bottom: 0;
+}
+
+h2{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+#success{
+    background-color: #FFC20E;
+}
+
+.notification-container button{
+    background-color: #00508F;
+    width: 10vw;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 1.5vh 1vw;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 10px;
+    /* margin-left: 7vw; */
+}
+.notification-container button:hover{
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: red;
+}
+#successful:hover{
+    color: #FFC20E;
+}
+
+.notification-container td{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

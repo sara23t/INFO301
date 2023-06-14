@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="css/search.css" />
+  <link rel="stylesheet" href="css/menteeNav.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600&display=swap" rel="stylesheet">
+</head>
+<form action="menteeProfile" method="GET" id="menteeProfileButton"></form>
+<body>
+  <div class="mentee-profile-navigation">
+      <nav class="nav-button-container">
+          <div class="mentee-heading">
+              <h2> Mentor Match</h2>
+          </div>
+          <div class="nav-buttons">
+          <button type="button" id="home" onclick="window.location.href = 'menteeHome';" >Home</button>
+          <button type="submit" id="profile" form="menteeProfileButton">Profile</button>
+          <button type="button" id="search" onclick="window.location.href = 'displayAd';" >Search</button>
+          <button type="button" id="resources" onclick="window.location.href = 'mentee-resources';" >Resources</button>
+          <button type="submit" id="logout" form="form1">Log out</button>
+          <form action="/logout" method="GET" id="form1"> </form>
+          </div>
+      </nav>
+  </div>
+  <div class="mentee-search-container">     
+        <form action="/search">
+          <div class="search-bar">
+          <div class="input-icons">
+            <i class="fa fa-search icon"></i>
+            <input type="search" name="search" placeholder="Search..." />
+          </div>
+            <select name="filter" id="filter" required = "true">
+              <optgroup label="Profile" value="mentor">
+                <option value="mentor first_name">First Name</option>
+                <option value="mentor surname">Surname</option>
+              </optgroup>
+              <optgroup label="Education" value="mentoreducation">
+                <option value="mentoreducation level">Level</option>
+                <option value="mentoreducation discipline">Discipline</option>
+                <option value="mentoreducation institution">Institution</option>
+              </optgroup>
+              <optgroup label="Experience" value="mentorexperience">
+                <option value="mentorexperience role">Role</option>
+                <option value="mentorexperience organisation">Organisation</option>
+                <option value="mentorexperience industry">Industry</option>
+              </optgroup>
+            </select>
+            <input type="submit" value="Search" id="submit-button">
+            </div>
+            <div class="holder"></div>
+        </form>
+
+      <h2>Mentors</h2>
+
+      <div>
+        <% if(userData.length > 0 ) { %>
+      
+          <% for(var i = 0;i<userData.length;i++){ %>
+
+            <div class="card">
+            <dl class="grid-container"> 
+            <div> <img src=<%= userData[i].imagepath %> width=140, height=140> </div>
+            <div><dd><%- userData[i].first_name %> <%- userData[i].surname %> </dd> </div>
+          
+            <form action="viewMentor" method="GET">
+              <input type="hidden" name="username" value=<%-userData[i].mentor_username %>>
+              <input id ="view-more" type="submit" name="submit" value="More >">
+              </form>
+            </dl>
+            
+            </div>
+          <% } %>
+
+        <% }else{ %>
+          <div class="error"><dd>There are no mentors currrently available</dd></div> 
+        <% } %>
+      </div>
+    </div>
+
+</body>
+</html>

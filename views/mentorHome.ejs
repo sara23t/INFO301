@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- <link rel="stylesheet" href="css/mentor-profile.css" /> -->
+    <link rel="stylesheet" href="css/mentorHome.css" />
+    <link rel="stylesheet" href="css/mentorNav.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <% var date = new Date().toLocaleDateString(); %>
+</head>
+<form action="mentorProfile" method="GET" id="mentorProfileButton"></form>
+<body>
+    <div class="mentor-profile-navigation">
+        <nav class="nav-button-container">
+            <div class="mentor-heading">
+                <h2> Mentor Match</h2>
+            </div>
+            <div class="nav-buttons">
+            <button type="button" id="home" onclick="window.location.href = 'mentorHome';" >Home</button>
+            <button type="submit" id="profile" form="mentorProfileButton">Profile</button>
+            <button type="button" id="resources" onclick="window.location.href = 'mentor-resources';" >Resources</button>
+            <button type="submit" id="logout" form="form1">Log out</button>
+            <form action="/logout" method="GET" id="form1"> </form>
+            </div>
+        </nav>
+    </div>
+        
+<div class="body-container">
+    <div class="notification-container">
+        <u><h1>Notifications for your applications</h1></u> <br>
+        <table class="data">
+            <thead>
+             <th>Mentorships</th>
+            </thead>
+    <% for(var i = 0;i<userData[0].length;i++){ %>
+        <% if (userData[0][i].mentor_approval == null && userData[0][i].admin_approval == null) { %>
+        <tr>
+            <td>
+                <%- userData[0][i].mentee_username %> has applied for a mentorship.
+                <br><br>
+                <form action="viewMentee" method="GET">
+                    <input type="hidden" name="username" value=<%-userData[0][i].mentee_username %>>
+                    <input id ="view-more" type="submit" name="submit" value="View Profile">
+                </form>
+                <form action="mentorapproves" method="POST">
+                <input name="menteeusername" type="hidden" id="menteeusername" value= <%- userData[0][i].mentee_username %>> 
+                <button id="accept" type="submit" value="Button" onclick="return confirm('Are you sure?')">Accept</button>
+                </form>
+                <form action="mentordeclines" method="POST">
+                <input name="menteeusername" type="hidden" id="menteeusername" value= <%- userData[0][i].mentee_username %>> 
+                <button type="submit" value="Button" onclick="return confirm('Are you sure?')">Decline</button>
+                </form>
+               
+            </td>
+        </tr>
+        <% } %>
+        <% if (userData[0][i].mentor_approval == true && userData[0][i].admin_approval == null) { %>
+            <tr>
+                <td>
+                    You have approved the mentorship with <%- userData[0][i].mentee_name %> and it is now awaiting admin review.
+                    <br><br>
+                    <form action="viewMentee" method="GET">
+                        <input type="hidden" name="username" value=<%-userData[0][i].mentee_username %>>
+                        <input id ="view-more" type="submit" name="submit" value="View Profile">
+                    </form>
+                    <form action="mentorremoves" method="POST">
+                    <input name="menteeusername" type="hidden" id="menteeusername" value= <%- userData[0][i].mentee_username %>> 
+                    <button type="submit" value="Button" onclick="return confirm('Are you sure?')">Remove</button>
+                    </form>
+                    
+                </td>
+            </tr>
+        <% } %>
+        <% if (userData[0][i].mentor_approval == true && userData[0][i].admin_approval == false) { %>
+            <tr>
+                <td>
+                    The admin has declined the mentorship with <%- userData[0][i].mentee_name %>.
+                    <form action="mentoracknowledges" method="POST">
+                    <input name="menteeusername" type="hidden" id="menteusername" value= <%- userData[0][i].mentee_username %>> 
+                    <button type="submit" value="Button" onclick="return confirm('Are you sure?')">Acknowledge</button>
+                    </form>
+                    
+                </td>
+            </tr>
+        <% } %>
+        <% if (userData[0][i].mentor_approval == true && userData[0][i].admin_approval == true) { %>
+            <tr>
+                <td id="success">
+                    Congratulations! Your mentorship with <%- userData[0][i].mentee_name %> has been approved!
+                    <br><br>
+                    <form action="viewMentee" method="GET">
+                        <input type="hidden" name="username" value=<%-userData[0][i].mentee_username %>>
+                        <input id ="view-more" type="submit" name="submit" value="View Profile">
+                    </form>
+                    <form action="mentorremoves" method="POST">
+                    <input name="menteeusername" type="hidden" id="menteeusername" value= <%- userData[0][i].mentee_username %>> 
+                    <button id="successful" type="submit" value="Button" onclick="return confirm('Are you sure?')">Remove</button>
+                    </form>
+                   
+                </td>
+            </tr>
+        <% } %>
+    <% } %>
+    </table>
+</div>
+<div class="meeting-container">
+    <div>
+        <u><h1>Meetings</h1></u> <br>
+        <table>
+                <tr>
+                    <td>Title</td>
+                    <td>Date</td>
+                    <td>Start</td>
+                    <td>End</td>
+                    <td>Description</td>
+                    <td></td>
+                </tr>
+                <% for(var i = 0; i < userData[1].length;i++) { %>
+                    <% if(userData[1][i].approval == 0) { %>
+                        <label>Mentee has asked for a meeting</label>
+                    <tr>
+                        <form action="mentormeetingreply" method="POST">
+                            <% var meetingdate = userData[1][i].meetingdate;
+                            const offset = meetingdate.getTimezoneOffset();
+                            meetingdate = new Date(meetingdate.getTime() - (offset*60*1000));
+                            meetingdate = meetingdate.toISOString().split('T')[0]; %>
+                            <input type="hidden" id="mentee_username" name="mentee_username" value= <%- userData[1][i].mentee_username %>>
+                            <td><%- userData[1][i].title %></td>
+                            <td><input required type="date" name="meetingdate" value = <%- meetingdate %>></td>
+                            <td><input required type="time" name="starttime" value = <%- userData[1][i].starttime %>></td>
+                            <td><input required type="time" name="endtime" value = <%- userData[1][i].endtime %>></td>
+                            <td><textarea required maxlength="100" type="text" name="description" ><%- userData[1][i].description %></textarea></td>
+                        <td><button type="submit" value="Button">Change Time</button></form>
+                            <form action="mentormeetingaccept" method="POST"><input type="hidden" id="mentee_username" name="mentee_username" value= <%- userData[1][i].mentee_username %>><button type="submit" value="Button">Accept</button></form>
+                            <form action="mentormeetingdecline" method="POST"><input type="hidden" id="mentee_username" name="mentee_username" value= <%- userData[1][i].mentee_username %>><button type="submit" value="Button">Decline</button></form></td>
+                    </tr>
+                    <% } %>
+                    <% if(userData[1][i].approval == 2) { %>
+                        <label>This meeting has been accepted</label>
+                        <tr>
+                            <td><%- userData[1][i].title %></td>
+                            <td><%- userData[1][i].meetingdate.toLocaleDateString("en-NZ"); %></td>
+                            <td><%- userData[1][i].starttime%></td>
+                            <td><%- userData[1][i].endtime %></td>
+                            <td><%- userData[1][i].description %></td>
+                            <td><form action="mentormeetingcancel" method="POST">
+                                <input type="hidden" id="mentee_username" name="mentee_username" value= <%- userData[1][i].mentee_username %>>
+                                <button type="submit" value="Button">Cancel</button></form></td>
+                        </tr>
+                    <% } %>
+                    <% if(userData[1][i].approval == 3) { %>
+                        <label>Awaiting Mentee response</label>
+                        <tr>
+                            <td><%- userData[1][i].title %></td>
+                            <td><%- userData[1][i].meetingdate.toLocaleDateString("en-NZ"); %></td>
+                            <td><%- userData[1][i].starttime%></td>
+                            <td><%- userData[1][i].endtime %></td>
+                            <td><%- userData[1][i].description %></td>
+                            <td><form action="mentormeetingcancel" method="POST">
+                                <input type="hidden" id="mentee_username" name="mentee_username" value= <%- userData[1][i].mentee_username %>>
+                                <button type="submit" value="Button">Cancel</button></form></td>
+                        </tr>
+                    <% } %>
+                    <% if(userData[1][i].approval == 4) { %>
+                        <label>Declined by mentee</label>
+                        <tr>
+                            <td><%- userData[1][i].title %></td>
+                            <td><%- userData[1][i].meetingdate.toLocaleDateString("en-NZ"); %></td>
+                            <td><%- userData[1][i].starttime%></td>
+                            <td><%- userData[1][i].endtime %></td>
+                            <td><%- userData[1][i].description %></td>
+                            <td><form action="mentormeetingdelete" method="POST">
+                                <input type="hidden" id="mentee_username" name="mentee_username" value= <%- userData[1][i].mentee_username %>>
+                                <button type="submit" value="Button">Acknowledge</button></form></td>
+                        </tr>
+                    <% } %>
+                    <% if(userData[1][i].approval == 6) { %>
+                        <label>Mentee has cancelled this meeting</label>
+                            <td><%- userData[1][i].title %></td>
+                            <td><%- userData[1][i].meetingdate.toLocaleDateString("en-NZ"); %></td>
+                            <td><%- userData[1][i].starttime%></td>
+                            <td><%- userData[1][i].endtime %></td>
+                            <td><%- userData[1][i].description %></td>
+                            <td><form action="mentormeetingdelete" method="POST">
+                                <input type="hidden" id="mentee_username" name="mentee_username" value= <%- userData[1][i].mentee_username %>>
+                                <button type="submit" value="Button">Acknowledge</button></form></td>
+                    <% } %>
+                <% } %>
+        </table>
+    </div>
+</div>
+    </div>
+</body>
+</html>

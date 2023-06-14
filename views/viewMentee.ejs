@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="css/mentorNav.css" />
+  <link rel="stylesheet" href="css/viewMentee.css" />
+
+  <!-- <link rel="stylesheet" href="css/viewMentor.css" /> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600&display=swap" rel="stylesheet">
+</head>
+<form action="mentorProfile" method="GET" id="mentorProfileButton"></form>
+<body>
+    <div class="mentor-profile-navigation">
+        <nav class="nav-button-container">
+            <div class="mentor-heading">
+                <h2> Mentor Match</h2>
+            </div>
+            <div class="nav-buttons">
+                <button type="button" id="home" onclick="window.location.href = 'mentorHome';" >Home</button>
+                <button type="submit" id="profile" form="mentorProfileButton">Profile</button>
+                <button type="button" id="resources" onclick="window.location.href = 'mentor-resources';" >Resources</button>
+                <button type="submit" id="logout" form="form1">Log out</button>
+                <form action="/logout" method="GET" id="form1"> </form>
+            </div>
+        </nav>
+    </div>
+
+    <div class="mentor-profile-container">
+        <div class="detail-image-container">
+            <div class="detail-container">
+                <i class="arrow left"></i>
+                <button type="button" id="back" onclick="window.location.href = 'mentorHome';" >Back</button>
+                <h1>(Mentee) <%- userData[0][0].first_name %> <%-userData[0][0].surname%> </h1>
+                <h4>Phone</h4> 
+                <p> <%- userData[0][0].phone_number %> </p>
+                <h4>Email</h4>
+                <p><%- userData[0][0].email_address %>  </p> 
+                <h4>Selected Industry</h4>
+                <p> <%- userData[6][0].selected_industry %> </p> <br>
+                <h3>Biography</h3>
+                <p> <%- userData[6][0].bio %> </p>
+            </div>
+            <div class="image-container">
+                <img id = "image" src=<%= userData[0][0].imagepath %> width=300, height=300>
+                <div>
+                    <% if(userData[6][0].facebook_link != 0) { %>
+                        <a  class="fa fa-facebook" onclick="window.location.href= 'https://www.facebook.com' +'<%-userData[6][0].facebook_link%>';"></a> 
+                    <% } %>
+                    <% if(userData[6][0].linkedin_link != 0) { %>
+                    <a  class="fa fa-linkedin" onclick="window.location.href= 'https://www.linkedin.com/in/' +'<%-userData[6][0].linkedin_link%>';"></a>
+                    <% } %>
+                        <br>
+                </div>
+            </div>
+        </div>
+        <br> <br>
+    
+        <div>
+            <h3>Education</h3>
+            <div class="row">
+                <% for(var i = 0;i<userData[1].length;i++){ %>
+                    <div class="column">
+                        <h4>Level</h4>
+                        <p> <%- userData[1][i].level %> </p>
+                        <h4>Discipline</h4>
+                        <p> <%- userData[1][i].discipline %> </p>
+                        <h4>Institution</h4>
+                        <p> <%- userData[1][i].institution %> </p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    <br>
+        <div>
+            <br><br>
+            <h3>Experience</h3>
+            <div class="row">
+                <% for(var i = 0;i<userData[2].length;i++){ %>
+                    <div class="column">
+                        <h4>Role</h4>
+                        <p> <%- userData[2][i].role %> </p>
+                        <h4>Organisation</h4>
+                        <p> <%- userData[2][i].organisation %> </p>
+                        <h4>Industry</h4>
+                        <p> <%- userData[2][i].industry %> </p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+<br>         
+        <div>
+            <br><br>
+            <h3>Skills</h3>
+            <div class = "row">
+                <div class = "column">
+                    <h4>Technical</h4>
+                    <% if(userData[3].length != 0) { %>
+                        <% for(var i = 0;i<userData[3].length;i++){ %>
+                            <p> <%- userData[3][i].technical %> </p>
+                        <% } %>
+                    <% }else{ %>
+                        <p>Not selected yet </p>
+                    <% } %>
+                </div>
+                <div class = "column">
+                    <h4>Interpersonal</h4>
+                    <% if(userData[4].length != 0) { %>
+                        <% for(var i = 0;i<userData[4].length;i++){ %>
+                            <p> <%- userData[4][i].interpersonal %> </p>
+                        <% } %>
+                    <% }else{ %>
+                        <p>Not selected yet </p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+            <br>
+        <div>
+            <br><br>
+            <h3> Interests</h3>
+                <% if(userData[5].length != 0) { %>
+                    <% for(var i = 0;i<userData[5].length;i++){ %>
+                        <p> <%- userData[5][i].interests %> </p>
+                    <% } %>
+                <% }else{ %>
+                        <p> Not selected yet </p>
+                <% } %>
+        </div>
+        <br>
+    </div>
+   
+
+</body>
+</html>

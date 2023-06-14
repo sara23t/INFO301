@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin home</title>
+</head>
+<script type="text/javascript">
+    function clicked() {
+        if (confirm('Do you want to submit?')) {
+            yourformelement.submit();
+        } else {
+            return false;
+        }
+    }
+</script>
+<div class="mentee-profile-navigation">
+    <nav class="nav-button-container">
+        <div class="mentee-heading">
+            <h2>Welcome Admin</h2>
+        </div>
+        <div class="nav-buttons">
+            <button class="button" type="submit" value="Back" onclick="window.location.href = 'admin-home';" />Admin
+            Home</button>
+            <button type="button" id="resources" onclick="window.location.href = 'resources-admin';">Resources</button>
+            <button type="submit" id="dataforms" form="dataform">Data</button>
+            <button type="submit" id="logout" form="form1">Log out</button>
+            <form action="/logout" method="GET" id="form1"> </form>
+        </div>
+    </nav>
+    <form action="admin-dataprint" method="GET" id="dataform"></form>
+</div>
+
+</html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/adminpage.css" /> -->
+    <link rel="stylesheet" href="css/adminNav.css" />
+
+    <title></title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center mt-3 mb-3"></h1>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="info">Mentee Information</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>User Name</th>
+                            <th>Email Address</th>
+                            <th>Phone Number</th>
+                            <th>Delete/Edit User</th>
+                        </tr>
+                        <% for(var i=0;i<userData[0].length;i++){ %>
+                            <tr>
+                                <td>
+                                    <%= userData[0][i].first_name %>
+                                </td>
+                                <td>
+                                    <%= userData[0][i].surname %>
+                                </td>
+                                <td>
+                                    <%=userData[0][i].mentee_username %>
+                                </td>
+                                <td>
+                                    <%= userData[0][i].email_address %>
+                                </td>
+                                <td>
+                                    <%= userData[0][i].phone_number %>
+                                </td>
+                                <td>
+
+                                    <form action="menteeProfile" method="POST">
+                                        <input type="hidden" name="username" value=<%-userData[0][i].mentee_username %>>
+                                        <input class="adminbutton" type="submit" name="submit" value="Edit">
+                                    </form>
+                                    <form action="deleteMentee" method="POST">
+                                        <input type="hidden" name="id" value=<%-userData[0][i].mentee_username %>>
+                                        <input class="adminbuttondelete" type="submit" name="submit" value="Delete">
+                                    </form>
+
+                            </tr>
+                            <% } %>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <h1 class="text-center mt-3 mb-3"></h1>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="info">Mentor Information</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>User Name</th>
+                            <th>Email Address</th>
+                            <th>Phone Number</th>
+                            <th>Delete/Edit User</th>
+                        </tr>
+                        <% for(var i=0;i<userData[1].length;i++){ %>
+                            <tr>
+                                <td>
+                                    <%= userData[1][i].first_name %>
+                                </td>
+                                <td>
+                                    <%= userData[1][i].surname %>
+                                </td>
+                                <td>
+                                    <%=userData[1][i].mentor_username %>
+                                </td>
+                                <td>
+                                    <%= userData[1][i].email_address %>
+                                </td>
+                                <td>
+                                    <%= userData[1][i].phone_number %>
+                                </td>
+                                <td>
+                                    <form action="mentorProfile" method="POST">
+                                        <input type="hidden" name="username" value=<%-userData[1][i].mentor_username %>>
+                                        <input class="adminbutton" type="submit" name="submit" value="Edit">
+                                    </form>
+
+                                    <form action="deleteMentor" method="POST">
+                                        <input type="hidden" name="id" value=<%-userData[1][i].mentor_username %>>
+                                        <input class="adminbuttondelete" type="submit" name="submit" value="Delete">
+                                    </form>
+
+                                </td>
+                            </tr>
+                            <% } %>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h1 class="text-center mt-3 mb-3"></h1>
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="info">Notifications</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <th>
+                                Mentorship Between:
+                            </th>
+                            <th>
+                                Options:
+                            </th>
+
+
+                            <% for(var i=0;i < userData[2].length; i++) { %>
+                                <% if (userData[2][i].mentor_approval==true && userData[2][i].admin_approval==null) { %>
+
+                                    <tr>
+                                        <td>
+                                            <b>Mentee: </b>
+                                            <%- userData[2][i].mentee_name %> has requested to be <b>Mentored</b> by <%-
+                                                    userData[2][i].mentor_name %>.
+                                                    <form action="adminapproves" method="POST">
+                                                        <input name="mentorusername" type="hidden" id="mentorusername"
+                                                            value=<%- userData[2][i].mentor_username %>>
+                                                        <input name="menteeusername" type="hidden" id="menteeusername"
+                                                            value=<%- userData[2][i].mentee_username %>>
+                                        <td><button class="adminbutton type="submit" value="Button"
+                                                onclick="return confirm('Are you sure?')">Accept</button>
+                                       
+                                        </form>
+                                        <form action="admindeclines" method="POST">
+                                            <input name="mentorusername" type="hidden" id="mentorusername" value=<%-
+                                                userData[2][i].mentor_username %>>
+                                            <input name="menteeusername" type="hidden" id="menteeusername" value=<%-
+                                                userData[2][i].mentee_username %>>
+                                            <button class="adminbuttondelete type="submit" value="Button"
+                                                    onclick="return confirm('Are you sure?')">Decline</button>
+                                            </td>
+                                        </form>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                        <% if (userData[2][i].mentor_approval==true &&
+                                            userData[2][i].admin_approval==true) { %>
+                                            <tr>
+                                                <td>
+                                                    <b> Mentor: </b>
+                                                    <%- userData[2][i].mentor_name %> and
+                                                        <b> Mentee: </b>
+                                                        <%- userData[2][i].mentee_name %>
+                                                            <form action="adminremoves" method="POST">
+                                                                <input name="mentorusername" type="hidden"
+                                                                    id="mentorusername" value=<%-
+                                                                    userData[2][i].mentor_username %>>
+                                                                <input name="menteeusername" type="hidden"
+                                                                    id="menteeusername" value=<%-
+                                                                    userData[2][i].mentee_username %>>
+                                                <td> <button class="adminbuttondelete type="submit" value="Button"
+                                                        onclick="return confirm('Are you sure?')">End this
+                                                        Mentorship?</button>
+                                                </td>
+                                                </form>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                                <% } %>
+                        </table>
+                    </div>
+                </div>
+</body>
+
+</html>

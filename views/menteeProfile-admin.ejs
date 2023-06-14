@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/mentee-profile.css" />
+    <!-- <link rel="stylesheet" href="css/menteeNav.css" /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/adminNav.css" />
+
+</head>
+<div class="mentee-profile-navigation">
+    <nav class="nav-button-container">
+        <div class="mentee-heading">
+            <h2>Welcome Admin</h2>
+        </div>
+        <div class="nav-buttons">
+            <button class="button" type="submit" value="Back" onclick="window.location.href = 'admin-home';" />Admin Home</button>
+            <button type="button" id="resources" onclick="window.location.href = 'resources-admin';">Resources</button>
+            <button type="submit" id="dataforms" form="dataform">Data</button>
+            <button type="submit" id="logout" form="form1">Log out</button>
+            <form action="/logout" method="GET" id="form1"> </form>
+        </div>
+    </nav>
+    <form action="admin-dataprint" method="GET" id="dataform"></form>
+</div>
+<div class="mentee-profile-container">
+    <div class="detail-image-container">
+        <div class="detail-container">
+            <h1>(Mentee) <%- userData[0][0].first_name %>
+                    <%-userData[0][0].surname%>
+            </h1>
+            <form action="menteePhone" method="POST">
+                <h4>Phone</h4>
+                <input type="tel" name="phonenumber" required maxlength="20" value=<%- userData[0][0].phone_number %> >
+                <h4>Email</h4>
+                <input type="text" maxlength="50" name="email" required style="width: 200px;" value=<%- userData[0][0].email_address %>
+                 <br>
+
+                <h4>Selected Industry</h4>
+                <select id="select_industry" name="select_industry" size="1">
+                    <option selected value=<%- userData[6][0].selected_industry %>> <%- userData[6][0].selected_industry
+                            %>
+                    </option>
+                    <option value="Art">Art</option>
+                    <option value="Health">Health</option>
+                    <option value="History">History</option>
+                    <option value="Geography">Geography</option>
+                    <option value="Science">Science</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Zoology">Zoology</option>
+                </select>
+                <br><br><br>
+                <h3>Biography</h3>
+                <br>
+                <textarea type="text" rows="10" cols="100" name="bio" placeholder="Start writing here"
+                    maxlength="300"><%- userData[6][0].bio %></textarea>
+                <br>
+                <br>
+                <input class="profile-add-button" type="submit" value="Save">
+            </form>
+        </div>
+        <div class="image-container">
+            <img id="image" src=<%=userData[0][0].imagepath %> width=300, height=300>
+            <form action="menteeupload" method="POST" enctype="multipart/form-data">
+                <input  type="file" name="image" />
+                <input type="hidden" name="username" value= <%- userData[0][0].mentee_username %>>
+                <button type="submit">Upload</button>
+            </form>
+            <form action="uploadsocialmedia" method="POST">
+                <h4>FaceBook</h4>
+                <label for="fb">https://www.facebook.com </label> <br>
+                <input type="text" maxlength="50" name="facebook" style="width: 200px;" placeholder="/user-id/" value=<%-
+                    userData[6][0].facebook_link %> >
+                <h4>LinkedIn</h4>
+                <label for="fb">https://www.linkedin.com/in </label>
+                <br>
+                <input type="text" maxlength="50" name="linkedin" style="width: 200px;" placeholder="/user-id/" value=<%-
+                    userData[6][0].linkedin_link %> ><br><br>
+                <input class="social-media-input" type="submit" name="submit" value="Add Social Media Links">
+            </form>
+        </div>
+    </div>
+    <br> <br>
+
+    <div>
+        <h3>Education</h3>
+        <div class="row">
+            <% for(var i=0;i<userData[1].length;i++){ %>
+                <div class="column">
+                    <form action="menteeDeleteEducation" method="POST">
+                        <h4>Level</h4>
+                        <input type="text" name="level1" required value=<%- JSON.stringify(userData[1][i].level) %>
+                        readonly>
+                        <h4>Discipline</h4>
+                        <input type="text" name="discipline1" required style="width: 200px;" value=<%-
+                            JSON.stringify(userData[1][i].discipline) %> readonly> <br>
+                        <h4>Institution</h4>
+                        <input type="text" name="institution1" required style="width: 200px;" readonly value=<%-
+                            JSON.stringify(userData[1][i].institution) %> > <br>
+                        <input class="profile-delete-button" type="submit" value="Delete Education">
+                    </form>
+                </div>
+                <% } %>
+        </div>
+    </div>
+    <br>
+    <div>
+        <form action="menteeEducation" method="POST">
+            <fieldset>
+                <legend> Add Education</legend>
+                <h4>Level</h4>
+                <input type="text" maxlength="50" name="level" required value="">
+                <h4>Discipline</h4>
+                <input type="text" maxlength="50" name="discipline" required style="width: 200px;" value=""> <br>
+                <h4>Institution</h4>
+                <input type="text" maxlength="50" name="institution" required style="width: 200px;" value=""> <br><br>
+                <input class="profile-add-button" type="submit" value="Add Education">
+            </fieldset>
+        </form>
+    </div>
+
+
+    <div>
+        <br><br>
+        <h3>Experience</h3>
+        <div class="row">
+            <% for(var i=0;i<userData[2].length;i++){ %>
+                <div class="column">
+                    <form action="menteeDeleteExperience" method="POST">
+                        <h4>Role</h4>
+                        <input type="text" id="role" name="role" readonly value=<%- JSON.stringify(userData[2][i].role)
+                            %>><br><br>
+                        <h4>Organisation</h4>
+                        <input type="text" id="organisation" name="organisation" readonly value=<%-
+                            JSON.stringify(userData[2][i].organisation) %>><br><br>
+                        <h4>Industry</h4>
+                        <input type="text" id="industry" name="industry" readonly value=<%-
+                            JSON.stringify(userData[2][i].industry) %>><br>
+                        <input class="profile-delete-button" type="submit" value="Delete Experience">
+                    </form>
+                </div>
+                <% } %>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <form action="menteeExperience" method="POST">
+            <fieldset>
+                <legend>Add Experience</legend>
+                <h4>Role</h4>
+                <input type="text" maxlength="50" name="role" required value="">
+                <h4>Organisation</h4>
+                <input type="text" maxlength="50" name="organisation" required style="width: 200px;" value=""> <br>
+                <h4>Industry</h4>
+                <input type="text" maxlength="50" name="industry" required style="width: 200px;" value=""> <br> <br>
+                <input class="profile-add-button" type="submit" value="Add Experience">
+            </fieldset>
+        </form>
+    </div>
+
+
+    <div>
+        <br><br>
+        <h3>Skills</h3>
+        <div class="row">
+            <div class="column">
+                <h4> Technical</h4>
+                <% for(var i=0;i<userData[3].length;i++){ %>
+                    <form action="menteeDeleteTechnical" method="POST">
+                        <input type="text" id="technical" name="technical" readonly value=<%-
+                            JSON.stringify(userData[3][i].technical) %>>
+                        <input class="profile-delete-button" type="submit" value="Delete"><br>
+                    </form>
+                    <% } %>
+            </div>
+            <div class="column">
+                <h4>Interpersonal</h4>
+                <% for(var i=0;i<userData[4].length;i++){ %>
+                    <form action="menteeDeleteInterpersonal" method="POST">
+                        <input type="text" id="interpersonal" name="interpersonal" readonly value=<%-
+                            JSON.stringify(userData[4][i].interpersonal) %>>
+                        <input class="profile-delete-button" type="submit" value="Delete"><br>
+                    </form>
+                    <% } %>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <form action="menteeSkills" method="POST">
+            <fieldset>
+                <legend>Add Skills</legend>
+                <input type="text" maxlength="50" id="skillDescription" required name="skillDescription" value="">
+                <select id="skillType" name="skillType" size="1">
+                    <option value="Technical">Technical</option>
+                    <option value="Interpersonal">Interpersonal</option>
+                </select>
+                <input class="profile-add-button" type="submit" value="Add Skill">
+            </fieldset>
+        </form>
+    </div>
+
+    <div>
+        <br><br>
+        <h3> Interests</h3>
+        <br>
+        <% for(var i=0;i<userData[5].length;i++){ %>
+            <form action="menteeDeleteInterest" method="POST">
+                <input type="text" id="interest" name="interest" readonly value=<%-
+                    JSON.stringify(userData[5][i].interests) %>>
+                <input class="profile-delete-button" type="submit" value="Delete"><br>
+            </form>
+            <% } %>
+    </div>
+    <br>
+
+    <div>
+        <form action="menteeInterest" method="POST">
+            <fieldset>
+                <legend>Add Interest</legend>
+                <input type="text" maxlength="50" id="interest" required name="interest" value="">
+                <input class="profile-add-button" type="submit" value="Add Interest">
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+</body>
+
+</html>

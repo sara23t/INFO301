@@ -1,0 +1,166 @@
+.row {
+    display: flex;
+  }
+  
+  .column {
+    flex: 50%;
+  }
+
+  body{
+    margin: 0;
+  }
+
+  .mentor-profile-container{
+    padding: 0 5vw;
+    padding-bottom: 5vh;
+    padding-top: 2vh;
+  }
+
+  .detail-image-container{
+    display: flex;
+    /* justify-content: center;
+    align-items: center;*/
+  } 
+
+  .detail-container{
+    flex:2;
+  }
+  .image-container{
+    flex:1;
+    padding: 0 5vw;
+    margin-top: 3vh ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #match{
+    /* position: relative;
+    left: 29%; */
+    background-color: #00508F;
+    width: 30%;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 1vh 1vw;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+
+  #match:hover{
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    color: #FFC20E;
+  }
+  #image{
+    border-radius: 20%;
+    border: 1px solid #00508F;
+  }
+
+  .fa {
+    padding: 15px;
+    font-size: 30px;
+    width: 25px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 20%;
+    cursor: pointer;
+  }
+
+  .fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+  }
+
+  #back{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    color: #00508F;
+    text-decoration: underline; 
+  }
+  .arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.image-container button{
+  background-color: #00508F;
+    width: auto;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 1.5vh 2vw;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.image-container button:hover{
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: #FFC20E;
+}
+
+
+  h1{
+    color: #00508F;
+  }
+
+  h3{
+    color: #FFC20E;
+    font-weight: 600;
+    font-size: 17pt;
+    margin: 0;
+
+  }
+
+  h4{
+    color: #92A8BA;
+    font-weight: 100;
+  }
+
+  .profile-add-button{
+    background-color: #00508F;
+    width: 10%;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 1vh 1vw;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+  .profile-add-button:hover{
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    color: #FFC20E;
+
+  }
+
+  .profile-delete-button {
+    background-color: white;
+    cursor: pointer;
+  }
+
+  .profile-delete-button:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    color: red;
+  }

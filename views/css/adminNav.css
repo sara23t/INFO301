@@ -1,0 +1,169 @@
+body {
+  margin: 0;
+  overflow: scroll;
+}
+
+.mentee-profile-navigation {
+  color: #00508F;
+  background-color: #00508F;
+}
+
+.mentee-heading {
+  color: #FFC20E;
+  padding: 0 10vw;
+  font-size: 20pt;
+  font-weight: 600;
+  flex: 1;
+}
+
+.nav-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.nav-buttons {
+  flex: 3;
+  padding: 3.5vh 2.5vw;
+
+}
+
+.nav-buttons button {
+  color: #00508F;
+  width: 17%;
+  padding: 1vh 0;
+  margin-right: 5px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.nav-buttons button:hover {
+  background-color: #FFC20E;
+
+}
+
+table,
+th,
+td,
+tr,
+tbody {
+  border: 2px solid;
+  border-color: #FFC20E;
+}
+
+h2 {
+  color: #FFC20E;
+}
+
+.container {
+  padding: 0 5vw;
+  padding-bottom: 5vh;
+  padding-top: 2vh;
+}
+ /* add this in when matching ccs done in new css file just for adminpage */
+/* .adminbutton {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}  */
+.adminbutton{
+  background-color: #00508F;
+  width: 100%;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 1vh 1vw;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 2%;
+}
+
+.adminbuttondelete{
+  background-color: #00508F;
+  width: 100%;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 1vh 1vw;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 2%;
+}
+.adminbutton:hover{
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: #FFC20E;
+
+}
+
+.adminbutton {
+  /* background-color: white; */
+  cursor: pointer;
+}
+.adminbuttondelete {
+  /* background-color: white; */
+  cursor: pointer;
+}
+
+.adminbuttondelete:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: red;
+}
+.buttonresourceadd:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: #FFC20E;
+}
+
+.buttonresourceadd{
+  background-color: #00508F;
+  /* width: 10%; */
+  color: white;
+  border: none;
+  outline: none;
+  padding: 1vh 1vw;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 2%;
+}
+.buttonresourcedelete{
+  background-color: #00508F;
+  width: 100%;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 1vh 1vw;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 2%;
+}
+.buttonresourcedelete:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: red;
+}
+.card{
+  border-color: #FFC20E;
+}
+.buttonresourceedit{
+  background-color: #00508F;
+  width: 100%;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 1vh 1vw;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 2%;
+}
+.buttonresourceedit:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: #FFC20E;
+}

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/mentor-profile.css" />
+    <link rel="stylesheet" href="css/mentorNav.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600&display=swap" rel="stylesheet">
+</head>
+<form action="mentorProfile" method="GET" id="mentorProfileButton"></form>
+<body>
+    <div class="mentor-profile-navigation">
+        <nav class="nav-button-container">
+            <div class="mentor-heading">
+                <h2> Mentor Match</h2>
+            </div>
+            <div class="nav-buttons">
+                <button type="button" id="profile" onclick="window.location.href = 'mentorHome';" >Home</button>
+                <button type="submit" id="profile" form="mentorProfileButton">Profile</button>
+            <button class="button" type="submit" value="Resources" onclick="window.location.href = 'mentor-resources';" />Resources</button>
+            <button type="submit" id="logout" form="form1">Log out</button>
+            <form action="/logout" method="GET" id="form1"> </form>
+            </div>
+        </nav>
+    </div>
+
+    <div class="mentor-profile-container">
+        <div class="detail-image-container">
+            <div class="detail-container">
+                <h1>(Mentor) <%- userData[0][0].first_name %> <%-userData[0][0].surname%> </h1>
+                <form action="mentorPhone" method="POST">
+                    <h4>Status</h4>
+                    <select id="hidden" name="hidden" size="1">
+                        <% if(userData[0][0].hidden != 0) { %>
+                        <option selected value="1">Available</option>
+                        <option value="0">Not Available</option>
+                        <% } else { %>
+                        <option selected value="0">Not Available</option>
+                        <option value="1">Available</option>
+                        <% }  %>
+                    </select> <br>
+                    <p>Please select available only when you have finished updating your profile details.</p>
+                    <h4>Phone</h4> 
+                    <input type="tel" name="phonenumber" maxlength="20" required  value = <%- userData[0][0].phone_number %> >
+                    <h4>Email</h4>
+                    <input type="text" name="email" maxlength="50" required style="width: 200px;"value = <%- userData[0][0].email_address %>  > <br>
+                    <h4>Selected Industry</h4>
+                    <select id="select_industry" name="select_industry" size="1">
+                        <option selected value=<%- userData[7][0].selected_industry %>> <%- userData[7][0].selected_industry %> </option>
+                        <option value="Art">Art</option>
+                        <option value="Health">Health</option>
+                        <option value="History">History</option>
+                        <option value="Geography">Geography</option>
+                        <option value="Science">Science</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Zoology">Zoology</option>
+                    </select>   
+                    <br><br><br>
+                    <h3>Biography</h3>
+                    <textarea rows="10" cols="100" name="bio" placeholder="Start writing here" maxlength="300" ><%- userData[7][0].bio %></textarea>    
+                    <br>
+                    <input class="profile-add-button" type="submit"  value="Save">
+                </form>
+            </div>
+            <div class="image-container">
+                <img id="image" src=<%= userData[0][0].imagepath %> width=300, height=300>
+                <form action="mentorupload" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="image" />
+                    <input type="hidden" name="username" value= <%- userData[0][0].mentor_username %>>
+                    <button type="submit">Upload</button>
+                </form>
+                <form action="uploadsocialmediaMentor" method="POST">
+                    <h4>FaceBook</h4>
+                    <label for="fb">https://www.facebook.com </label><br>
+                    <input type="text" name="facebook" maxlength="50"  style="width: 200px;" placeholder="/user-id/" value =  <%- userData[7][0].facebook_link %>  > <br>
+                    <h4>Linked In</h4>
+                    <label for="fb">https://www.linkedin.com/in </label><br>
+                    <input type="text" name="linkedin" maxlength="50"  style="width: 200px;" placeholder="/user-id/" value = <%- userData[7][0].linkedin_link %>  > <br><br>
+                    <input class="social-media-input" type="submit" name="submit" value="Add Social Media Links">
+                </form>
+                </div>
+
+        </div>
+    <br> <br>
+
+    <div>
+        <h3>Education</h3>
+        <div class="row">
+            <% for(var i=0;i<userData[1].length;i++){ %>
+                <div class="column">
+                    <form action="mentorDeleteEducation" method="POST">
+                        <h4>Level</h4>
+                        <input type="text" name="level1" required value=<%- JSON.stringify(userData[1][i].level) %>
+                        readonly>
+                        <h4>Discipline</h4>
+                        <input type="text" name="discipline1" required style="width: 200px;" value=<%-
+                            JSON.stringify(userData[1][i].discipline) %> readonly> <br>
+                        <h4>Institution</h4>
+                        <input type="text" name="institution1" required style="width: 200px;" readonly value = <%- JSON.stringify(userData[1][i].institution) %> >  <br>
+                        <input class="profile-delete-button" type="submit"  value="Delete Education">
+                    </form>
+                </div>
+                <% } %>
+        </div>
+    </div>
+    <br>
+    <div>
+        <form action="mentorEducation" method="POST">
+            <fieldset>
+                <legend> Add Education</legend>
+                <h4>Level</h4>
+                <input type="text" name="level" maxlength="50" required value="">
+                <h4>Discipline</h4>
+                <input type="text" name="discipline" maxlength="50" required style="width: 200px;" value=""> <br>
+                <h4>Institution</h4>
+                    <input type="text" name="institution" maxlength="50" required style="width: 200px;"value ="" > <br> <br>
+                <input class="profile-add-button" type="submit"  value="Add Education">
+            </fieldset>
+        </form>
+    </div>
+
+
+        <div >
+            <br><br>
+            <h3>Experience</h3>
+            <div class="row">
+                <% for(var i = 0;i<userData[2].length;i++){ %>
+                    <div class="column">
+                        <form action="mentorDeleteExperience" method="POST">
+                            <h4>Role</h4>
+                            <input type="text" id="role" name="role" readonly value=<%- JSON.stringify(userData[2][i].role) %>><br><br>
+                            <h4>Organisation</h4>
+                            <input type="text" id="organisation" name="organisation"  readonly value=<%- JSON.stringify(userData[2][i].organisation) %>><br><br>
+                            <h4>Industry</h4>
+                            <input type="text" id="industry" name="industry" readonly value=<%- JSON.stringify(userData[2][i].industry) %>><br>
+                            <input class="profile-delete-button" type="submit"  value="Delete Experience">
+                        </form>
+                    </div>
+                <% } %>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <form action="mentorExperience" method="POST">
+            <fieldset>
+                <legend>Add Experience</legend>
+                <h4>Role</h4>
+                <input type="text" name="role" maxlength="50" required value="">
+                <h4>Organisation</h4>
+                <input type="text" name="organisation" maxlength="50" required style="width: 200px;" value=""> <br>
+                <h4>Industry</h4>
+                    <input type="text" name="industry" required maxlength="50" style="width: 200px;"value ="" > <br> <br>
+                <input class="profile-add-button" type="submit"  value="Add Education">
+            </fieldset>
+            </form>
+        </div>
+
+        <div >
+            <br><br>
+            <h3>Skills</h3>
+            <div class = "row">
+                <div class = "column">
+                    <h4> Technical</h4>
+                    <% for(var i = 0;i<userData[3].length;i++){ %>
+                        <form action="mentorDeleteTechnical" method="POST">
+                            <input type="text" id="technical" name="technical" readonly value=<%- JSON.stringify(userData[3][i].technical) %>>
+                            <input class="profile-delete-button" type="submit"  value="Delete"><br>
+                        </form>
+                    <% } %>
+                </div>
+                <div class = "column">
+                    <h4>Interpersonal</h4>
+                    <% for(var i = 0;i<userData[4].length;i++){ %>
+                        <form action="mentorDeleteInterpersonal" method="POST">
+                            <input type="text" id="interpersonal" name="interpersonal" readonly value=<%- JSON.stringify(userData[4][i].interpersonal) %>>
+                            <input class="profile-delete-button" type="submit"  value="Delete"><br>
+                        </form>
+                    <% } %>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <form action="mentorSkills" method="POST">
+            <fieldset>
+                <legend>Add Skills</legend>
+                <input type="text" id="skillDescription" maxlength="50" required name="skillDescription" value="">
+                <select id="skillType" name="skillType" size="1">
+                    <option value="Technical">Technical</option>
+                    <option value="Interpersonal">Interpersonal</option>
+                </select>
+                <input class="profile-add-button" type="submit"  value="Add Skill">
+                </fieldset>
+            </form>
+        </div>
+
+        <div>
+            <br><br>
+            <h3> Interests</h3>
+            <% for(var i = 0;i<userData[5].length;i++){ %>
+                <form action="mentorDeleteInterest" method="POST">
+                    <input type="text" id="interest" name="interest" readonly value=<%- JSON.stringify(userData[5][i].interests) %>>
+                    <input class="profile-delete-button" type="submit"  value="Delete"><br>
+                </form>
+            <% } %>
+    </div>
+    <br>
+
+    <div>
+        <form action="mentorInterest" method="POST">
+            <fieldset>
+                <legend>Add Interest</legend>
+                <input type="text" id="interest" maxlength="50" required name="interest" value="">
+                <input class="profile-add-button" type="submit"  value="Add Interest">
+                </fieldset>
+            </form>
+        </div>
+
+        <div>
+            <br><br>
+            <h3>Preferences </h3>
+            <form action="mentorPreference" method="POST">
+                <h4>Mentee Capacity</h4> 
+                <select id="capacity" name="capacity" size="1">
+                    <% if(userData[6].length != 0) { %>
+                        <% for(var i = 0;i<userData[6][0].capacity;i++){ %>
+                            <option value=<%- i %>><%- i %></option>
+                        <% } %>
+                            <option selected value=<%- userData[6][0].capacity %> > <%- userData[6][0].capacity %>
+                            </option>
+                            <% for(var i=userData[6][0].capacity +1;i<=5;i++){ %>
+                                <option value=<%- i %>><%- i %>
+                                </option>
+                                <% } %>
+
+                                    <% }else { %>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <% } %>
+            </select>
+
+            <h4>Meeting Duration (Minutes)</h4>
+            <select id="duration" name="duration" size="1">
+                <% if(userData[6].length !=0) { %>
+                    <% for(var i=0;i<userData[6][0].meetingTime;i=i+10){ %>
+                        <option value=<%- i %>><%- i %>
+                        </option>
+                        <% } %>
+                            <option selected value=<%- userData[6][0].meetingTime %> > <%- userData[6][0].meetingTime %>
+                            </option>
+                            <% for(var i=userData[6][0].meetingTime +10;i<=60;i=i+10){ %>
+                                <option value=<%- i %>><%- i %>
+                                </option>
+                                <% } %>
+
+                                    <% }else { %>
+                                        <option value="0">0</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="40">40</option>
+                                        <option value="50">50</option>
+                                        <option value="60">60</option>
+                                        <% } %>
+            </select>
+
+            <h4>Time Available</h4>
+            <% if(userData[6].length !=0) { %>
+                <textarea required id="timeAvailable" maxlength="50"
+                    name="timeAvailable"><%- userData[6][0].timeAvailable %></textarea> <br>
+                <% } else { %>
+                    <textarea required id="timeAvailable" name="timeAvailable" required  maxlength="50"
+                        placeholder="e.g. Monday, Wednesday, Saturday 11am-1pm"></textarea>
+                    <% } %>
+
+                        <h4>Mentorship Relationship</h4>
+                        <select id="relationship" name="relationship" size="1">
+                            <% if(userData[6].length !=0) { %>
+                                <% if(userData[6][0].relationship=="Formal" ) { %>
+                                    <option value="None Chosen">None Chosen</option>
+                                    <option value="Casual">Casual</option>
+                                    <option selected value=<%- userData[6][0].relationship %> > <%-
+                                            userData[6][0].relationship %>
+                                    </option>
+                                    <% } else if (userData[6][0].relationship=="Casual" ){ %>
+                                        <option value="None Chosen">None Chosen</option>
+                                        <option selected value=<%- userData[6][0].relationship %> > <%-
+                                                userData[6][0].relationship %>
+                                        </option>
+                                        <option value="Formal">Formal</option>
+                                        <% } else if (userData[6][0].relationship=="None Chosen" ){ %>
+                                            <option selected value=<%- userData[6][0].relationship %> > <%-
+                                                    userData[6][0].relationship %>
+                                            </option>
+                                            <option value="Casual">Causal</option>
+                                            <option value="Formal">Formal</option>
+                                            <% } %>
+
+                                                <% }else { %>
+                                                    <option value="None Chosen">None Chosen</option>
+                                                    <option value="Formal">Formal</option>
+                                                    <option value="Casual">Casual</option>
+                                                    <% } %>
+
+
+                </select> <br> <br>
+                <input class="profile-add-button" type="submit"  value="Save">
+            </form>
+        </div>
+    </div>
+    
+       
+
+</body>
+
+</html>

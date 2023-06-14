@@ -1,0 +1,30 @@
+:root {
+    /* otago colours */
+    --primary: #00508F;
+    --secondary: #FFC20E;
+  } 
+  
+  * {
+      margin: 0;
+  
+    }
+    
+    body{
+      font-family: 'Inter', sans-serif;
+    }
+
+    .back {
+      position: absolute;
+      top: 20px;
+      color: var(--secondary);
+      font-size: 15px;
+      background-color: white;
+      padding: 7px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  
+    .back:hover{
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  
+    }
